@@ -1,116 +1,138 @@
 import streamlit as st
 import pandas as pd
 
-# Page setup for premium Healthcare Fintech experience
-st.set_page_config(page_title="Health Dept Welfare Portal", page_icon="🩺", layout="centered")
+# Page Configuration for Premium Mobile-Responsive View
+st.set_page_config(page_title="Health Welfare Portal", page_icon="🩺", layout="centered")
 
-# --- ADVANCED MEDICAL-TEAL & SLATE FINTECH CSS ---
+# --- CUSTOM ULTRA-PREMIUM MEDICAL & EASYPAISA GREEN THEME ---
 st.markdown("""
 <style>
-    /* Clean App Canvas Background */
-    .stApp { background-color: #f8fafc; }
+    /* Clean Mobile App Canvas Background */
+    .stApp { background-color: #f4f7f6; }
     
-    /* Strict removal of default streamlit header lines */
+    /* Hide Default Streamlit Layout Elements */
     header { visibility: hidden; }
+    .stDeployButton { display: none !important; }
+    footer { visibility: hidden; }
     
-    /* Premium Health Container Wrapper */
+    /* Uniform Form Wrapper */
     .clean-container {
         background-color: #ffffff;
-        padding: 30px;
-        border-radius: 18px;
-        box-shadow: 0 10px 25px rgba(13, 148, 136, 0.03);
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
         border: 1px solid #e2e8f0;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
+    }
+
+    /* Strict Authentication Shield Layout */
+    .login-box {
+        background-color: #ffffff;
+        padding: 35px;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 102, 67, 0.05);
+        border: 1px solid #e6f0ec;
+        text-align: center;
+        margin-top: 30px;
     }
     
-    /* Healthcare Teal Premium Buttons */
+    /* Easypaisa Premium Green Action Buttons */
     .stButton>button {
-        background: linear-gradient(135deg, #0d9488 0%, #115e59 100%) !important;
+        background: linear-gradient(135deg, #006643 0%, #004d32 100%) !important;
         color: #ffffff !important;
         border-radius: 12px !important;
         border: none !important;
-        height: 48px;
+        height: 50px;
         font-weight: 600;
         font-size: 16px;
         width: 100%;
-        box-shadow: 0 4px 12px rgba(13, 148, 136, 0.2);
+        box-shadow: 0 4px 15px rgba(0, 102, 67, 0.2);
     }
     
-    /* Medical Verified Identity Badge */
+    /* Verified Medical Identity Shield Badge */
     .profile-card {
         background-color: #ffffff;
         padding: 15px 20px;
         border-radius: 14px;
-        border-left: 5px solid #0d9488;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        border-left: 5px solid #006643;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.01);
         margin-bottom: 25px;
     }
     
-    /* Digital Wallet Balance Component (Teal-Green Premium Gradient) */
-    .digital-wallet {
-        background: linear-gradient(135deg, #0f172a 0%, #0d9488 100%);
+    /* THE EXACT EASYPAISA WALLET CARD COMPONENT */
+    .easypaisa-card {
+        background: linear-gradient(135deg, #006643 0%, #024f35 100%);
         color: #ffffff;
-        padding: 30px;
+        padding: 25px;
         border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(13, 148, 136, 0.15);
-        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(0, 102, 67, 0.15);
+        margin-bottom: 25px;
     }
     
-    /* Grid Feature Display Blocks (Clean Medical Cards Layout) */
-    .icon-grid-card {
+    /* Pure CSS Decorative Medical Icon Vector */
+    .medical-shield-logo {
+        font-size: 65px;
+        background: #e6f0ec;
+        width: 110px;
+        height: 110px;
+        line-height: 110px;
+        border-radius: 50%;
+        margin: 0 auto 20px auto;
+        color: #006643;
+    }
+    
+    /* Grid Analytics Cards (Inspired by Replit layout inside your screenshots) */
+    .grid-asset-card {
         background-color: #ffffff;
-        padding: 22px;
+        padding: 20px;
         border-radius: 16px;
         text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.01);
         border: 1px solid #edf2f7;
-        transition: transform 0.2s;
-    }
-    .icon-grid-card:hover {
-        transform: translateY(-3px);
     }
 </style>
 """, unsafe_allow_html=True)
 
-# --- SECURE SESSION CONTROLLER ---
+# --- ENGINE SESSION ACCESS CONTROLLER ---
 if 'is_unlocked' not in st.session_state:
     st.session_state['is_unlocked'] = False
 if 'user_data' not in st.session_state:
     st.session_state['user_data'] = {"name": "", "email": ""}
 
-# --- SCREEN 1: STRICT SECURE SIGN-IN (Direct Medical Shield) ---
+# --- SCREEN 1: LOCKED SIGN-IN PORTAL (Direct & Clean Shield Form) ---
 if not st.session_state['is_unlocked']:
-    st.markdown("<div style='max-width: 500px; margin: 0 auto;'>", unsafe_allow_html=True)
-    st.markdown("<div class='clean-container' style='margin-top: 40px;'>", unsafe_allow_html=True)
-    st.markdown("<h2 style='text-align: center; color: #0f172a; font-weight: 700; margin-bottom: 5px;'>Health Department Secure Portal</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #64748b; font-size: 14px; margin-bottom: 25px;'>Authentication required to access encrypted pension telemetry.</p>", unsafe_allow_html=True)
+    st.markdown("<div style='max-width: 460px; margin: 0 auto;'>", unsafe_allow_html=True)
+    st.markdown("<div class='login-box'>", unsafe_allow_html=True)
     
-    # Clean Medical Portal Login Illustration
-    st.image("https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg", width=280)
+    # 100% Reliable Code Vector (No broken web URLs)
+    st.markdown("<div class='medical-shield-logo'>🩺</div>", unsafe_allow_html=True)
     
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color: #0f172a; font-weight: 700; margin: 0 0 5px 0;'>Health Portal Secure Access</h2>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #64748b; font-size: 13px; margin-bottom: 25px;'>Enter credentials to access active retirement telemetry asset modules.</p>", unsafe_allow_html=True)
+    
+    # Secure Inputs Layout
     u_name = st.text_input("Officer Full Name", placeholder="e.g., Dr. Alina Khan")
-    u_email = st.text_input("Registered Departmental Email", placeholder="alina@health.gov.pk")
+    u_email = st.text_input("Registered Departmental Email", placeholder="username@health.gov.pk")
     u_pin = st.text_input("Secure Vault Access PIN", type="password", placeholder="••••••••")
     
     st.markdown("<br>", unsafe_allow_html=True)
-    if st.button("Authorize & Secure Sign In"):
+    if st.button("Authorize & Sign In"):
         if u_name and u_email and u_pin:
             st.session_state['is_unlocked'] = True
             st.session_state['user_data']['name'] = u_name
             st.session_state['user_data']['email'] = u_email
             st.rerun()
         else:
-            st.error("🔒 Access Denied: Please fill out all departmental fields.")
+            st.error("🔒 Access Denied: All validation attributes must be completed.")
     st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-# --- SCREEN 2: MEDICAL WELFARE ANALYTICS DASHBOARD (UNLOCKED) ---
+# --- SCREEN 2: DYNAMIC HEALTH WELFARE ANALYTICS DASHBOARD ---
 else:
-    # Navigation Title & Sign-Out Trigger
+    # Action Navbar Grid Layout
     col_nav, col_btn = st.columns([4, 1])
     with col_nav:
-        st.markdown("<h2 style='color: #0f172a; font-weight: 700; margin: 0;'>🩺 Health Dept. Analytics</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='color: #0f172a; font-weight: 700; margin: 0;'>🩺 Department Dashboard</h2>", unsafe_allow_html=True)
     with col_btn:
         if st.button("Sign Out"):
             st.session_state['is_unlocked'] = False
@@ -118,21 +140,18 @@ else:
             
     st.markdown("<hr style='margin: 15px 0 25px 0; border: 0; border-top: 1px solid #e2e8f0;'>", unsafe_allow_html=True)
 
-    # 1. Verified Profile Identity Badge Box
+    # 1. Department Verified Profile Shield Badge
     st.markdown(f"""
     <div class='profile-card'>
-        <p style='margin:0; color:#0d9488; font-size:11px; font-weight:600; letter-spacing:0.5px;'>🛡️ HEALTH DEPARTMENT VERIFIED GATEWAY</p>
-        <p style='margin:5px 0 0 0; font-weight:700; color:#0f172a;'>Officer: {st.session_state['user_data']['name']}</p>
-        <p style='margin:2px 0 0 0; color:#64748b; font-size:13px;'>Gov Email: {st.session_state['user_data']['email']}</p>
+        <p style='margin:0; color:#006643; font-size:11px; font-weight:600; letter-spacing:0.5px;'>🛡️ GOVERNMENT WELFARE DEPT VALIDATED TOKEN</p>
+        <p style='margin:4px 0 0 0; font-weight:700; color:#0f172a;'>Officer identity: {st.session_state['user_data']['name']}</p>
+        <p style='margin:2px 0 0 0; color:#64748b; font-size:12px;'>Gateway Address: {st.session_state['user_data']['email']}</p>
     </div>
     """, unsafe_allow_html=True)
 
-    # 2. Premium Medical Vector Illustration
-    st.image("https://img.freepik.com/free-vector/medical-video-consultation-concept-illustration_114360-5025.jpg", use_container_width=True)
-
-    # 3. Clean Parameter Calibration Panel
+    # 2. Tuning Control Panel Container Block
     st.markdown("<div class='clean-container'>", unsafe_allow_html=True)
-    st.markdown("<p style='color: #0f172a; font-weight: 600; margin-top: 0;'>⚙️ Actuarial Parameter Calibration</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #006643; font-weight: 600; margin: 0 0 15px 0;'>⚙️ Parameter Configuration Grid</p>", unsafe_allow_html=True)
     col_in1, col_in2 = st.columns(2)
     with col_in1:
         basic_pay = st.number_input("Last Basic Pay Matrix (PKR)", min_value=10000, value=85000, step=5000)
@@ -142,7 +161,7 @@ else:
         current_age = st.slider("Active Retirement Age Parameter", min_value=60, max_value=85, value=60)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Math Logic Engine Formulas
+    # Internal Core Business Engine Matrix Calculations
     calculated_years = 30 if service_years > 30 else service_years
     gross_pension = (basic_pay * calculated_years * 7) / 300
     net_monthly_base = gross_pension * 0.65
@@ -150,46 +169,44 @@ else:
     adhoc_relief = net_monthly_base * 0.15
     total_revenue = net_monthly_base + medical_allowance + adhoc_relief
 
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # 4. Premium Digital Wallet Header (Teal-Green & Slate Gradient Theme)
+    # 3. THE LIVE PREMIUM WALLET DISPLAY (Exact UI Matching to your uploaded screenshot)
     st.markdown(f"""
-    <div class='digital-wallet'>
-        <p style='margin:0; font-size:13px; font-weight: 500; opacity:0.9; letter-spacing: 0.5px;'>🟢 NET UNLOCKED MONTHLY HEALTH WELFARE DISBURSEMENT</p>
-        <h1 style='margin:10px 0; font-size:42px; font-weight:700; letter-spacing: -0.5px;'>Rs. {total_revenue:,.2f}</h1>
-        <p style='margin:0; font-size:12px; opacity:0.8;'>🔒 Certified under Government Health Ordinance Regulations</p>
+    <div class='easypaisa-card'>
+        <p style='margin:0; font-size:12px; font-weight: 500; opacity:0.9; letter-spacing: 0.5px;'>🟢 AVAILABLE MONTHLY WELFARE BALANCE</p>
+        <h1 style='margin:8px 0; font-size:38px; font-weight:700; letter-spacing: -0.5px;'>Rs. {total_revenue:,.2f}</h1>
+        <p style='margin:0; font-size:11px; opacity:0.8;'>✓ Active Bank-Grade Welfare Account Distribution Pipeline Unlocked</p>
     </div>
     """, unsafe_allow_html=True)
 
-    # 5. Icon Feature Analytics Matrix Grids (Teal Compliant)
+    # 4. Clean Feature Grid Display Matrix with Proper Medical/Finance Icons 
     st.markdown("### 📱 Active Benefit Feature Matrix")
     col_f1, col_f2, col_f3 = st.columns(3)
     with col_f1:
         st.markdown(f"""
-        <div class='icon-grid-card'>
-            <span style='font-size:32px;'>💰</span>
-            <p style='margin:8px 0 4px 0; color:#64748b; font-size:12px; font-weight:500;'>Net Pension Base</p>
-            <h4 style='margin:0; color:#0f172a; font-weight:700;'>Rs. {net_monthly_base:,.0f}</h4>
+        <div class='grid-asset-card'>
+            <span style='font-size:30px;'>💰</span>
+            <p style='margin:6px 0 2px 0; color:#64748b; font-size:12px; font-weight:500;'>Net Pension</p>
+            <h5 style='margin:0; color:#0f172a; font-weight:700;'>Rs. {net_monthly_base:,.0f}</h5>
         </div>
         """, unsafe_allow_html=True)
     with col_f2:
         st.markdown(f"""
-        <div class='icon-grid-card'>
-            <span style='font-size:32px;'>🩺</span>
-            <p style='margin:8px 0 4px 0; color:#64748b; font-size:12px; font-weight:500;'>Medical Care Fund</p>
-            <h4 style='margin:0; color:#0f172a; font-weight:700;'>Rs. {medical_allowance:,.0f}</h4>
+        <div class='grid-asset-card'>
+            <span style='font-size:30px;'>🏥</span>
+            <p style='margin:6px 0 2px 0; color:#64748b; font-size:12px; font-weight:500;'>Medical Fund</p>
+            <h5 style='margin:0; color:#0f172a; font-weight:700;'>Rs. {medical_allowance:,.0f}</h5>
         </div>
         """, unsafe_allow_html=True)
     with col_f3:
         st.markdown(f"""
-        <div class='icon-grid-card'>
-            <span style='font-size:32px;'>⚡</span>
-            <p style='margin:8px 0 4px 0; color:#64748b; font-size:12px; font-weight:500;'>Adhoc Relief Fund</p>
-            <h4 style='margin:0; color:#0f172a; font-weight:700;'>Rs. {adhoc_relief:,.0f}</h4>
+        <div class='grid-asset-card'>
+            <span style='font-size:30px;'>⚡</span>
+            <p style='margin:6px 0 2px 0; color:#64748b; font-size:12px; font-weight:500;'>Adhoc Relief</p>
+            <h5 style='margin:0; color:#0f172a; font-weight:700;'>Rs. {adhoc_relief:,.0f}</h5>
         </div>
         """, unsafe_allow_html=True)
 
-    # Data Calculation for Future 5 Years Chart & Table
+    # Data Calculation for 5-Year Trends Metrics
     timeline, pension_trend, medical_trend = [], [], []
     temp_pension = total_revenue
     base_medical_cost = 4000 if bps_scale <= 15 else 7000
@@ -200,7 +217,7 @@ else:
         pension_trend.append(temp_pension)
         medical_trend.append(base_medical_cost * ((1.12) ** i))
 
-    # 6. Interactive Dual Line Growth Vector Chart
+    # 5. Real-Time Interactive Trends Graph Chart
     st.markdown("<br>### 📈 Actuarial Assets Growth Vector & Health Inflation Trends", unsafe_allow_html=True)
     chart_data = pd.DataFrame({
         "Timeline": timeline,
@@ -209,7 +226,7 @@ else:
     })
     st.line_chart(chart_data.set_index("Timeline"))
 
-    # 7. Detailed Future 5-Year Data Forecasting Matrix Table
+    # 6. Detailed Numeric Future 5-Year Matrix Table (Perfect Alignment Grid)
     st.markdown("### 📊 Forecasted Future 5-Year Pension Compounding Matrix")
     matrix_data = []
     for i in range(1, 6):
@@ -220,4 +237,4 @@ else:
             "Net Liquid Surplus Account": f"PKR {(pension_trend[i] - medical_trend[i]):,.2f}"
         })
     st.table(matrix_data)
-        
+    
