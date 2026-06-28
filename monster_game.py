@@ -2,98 +2,104 @@ import streamlit as st
 import collections
 import random
 
-# Core Page Setup optimized for mobile app view
-st.set_page_config(page_title="Cyber-Hunt: Endless AI", layout="centered", initial_sidebar_state="collapsed")
+# Core Page Setup optimized for mobile viewport
+st.set_page_config(page_title="Mystic Hunt", layout="centered", initial_sidebar_state="collapsed")
 
-# Advanced Cyberpunk UI Stylesheet
+# Mystical Forest Neon Theme Stylesheet
 st.markdown("""
     <style>
-    body { background-color: #05050a; color: #a9b7c6; font-family: 'Courier New', Courier, monospace; }
-    .block-container { padding-top: 0.5rem !important; max-width: 440px !important; margin: auto; }
+    body { background-color: #0d1b15; color: #e0f2e9; font-family: 'Courier New', Courier, monospace; }
+    .block-container { padding-top: 1rem !important; max-width: 420px !important; margin: auto; }
     
-    /* Main Cinematic Arcade Header */
-    .arcade-title {
+    /* Nature Neon Title */
+    .nature-title {
         text-align: center;
-        background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+        background: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 900;
-        font-size: 34px;
-        letter-spacing: 3px;
-        margin-bottom: 0px;
-        text-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+        font-size: 36px;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        text-shadow: 0 0 15px rgba(120, 255, 214, 0.4);
     }
     
-    /* Live Stats Dashboard Dashboard (HUD) */
+    /* Home Screen Menu styling */
+    .main-menu-card {
+        background: linear-gradient(180deg, rgba(20, 50, 35, 0.9) 0%, rgba(10, 30, 20, 0.95) 100%);
+        border: 2px solid #a8ff78;
+        border-radius: 20px;
+        padding: 30px 20px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(168, 255, 120, 0.25);
+        margin-top: 20px;
+    }
+    
+    /* Live Stats Dashboard (HUD) */
     .hud-container {
         display: flex;
         justify-content: space-between;
-        background: #0d0e15;
-        border: 1px solid #1f4068;
+        background: #08120e;
+        border: 1px solid #2d5a44;
         border-radius: 12px;
         padding: 8px 15px;
-        margin-bottom: 12px;
-        box-shadow: inset 0 0 10px rgba(0,255,245,0.1);
+        margin-bottom: 15px;
     }
-    .hud-stat { font-size: 13px; font-weight: bold; color: #00fff5; }
-    .hud-val { color: #ffffff; font-size: 14px; }
+    .hud-stat { font-size: 13px; font-weight: bold; color: #a8ff78; }
 
-    /* Tactical Combat Grid Frame */
-    .matrix-frame {
+    /* Interactive Grid Box */
+    .grid-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: radial-gradient(circle, #100c24 0%, #05020f 100%);
-        border: 2px solid #4facfe;
+        background: rgba(10, 25, 18, 0.9);
+        border: 2px solid #78ffd6;
         border-radius: 20px;
-        padding: 14px;
-        box-shadow: 0 0 35px rgba(79, 172, 254, 0.35);
-        margin-bottom: 12px;
-    }
-    .matrix-row { display: flex; justify-content: center; }
-    .matrix-cell {
-        width: 44px; height: 44px; margin: 3px; border-radius: 10px;
-        background: rgba(26, 26, 46, 0.8); border: 1px solid #1f4068;
-        display: flex; align-items: center; justify-content: center;
-        transition: all 0.15s ease-in-out;
+        padding: 12px;
+        box-shadow: 0 0 25px rgba(120, 255, 214, 0.2);
+        margin-bottom: 15px;
     }
     
-    /* High-Attraction Animated Neon Entity Node Glows */
-    .node-player { background: #00fff5; border: 2px solid #ffffff; box-shadow: 0 0 18px #00fff5, inset 0 0 8px rgba(0,0,0,0.3); }
-    .node-monster { background: #ff0055; border: 2px solid #ffffff; box-shadow: 0 0 18px #ff0055, inset 0 0 8px rgba(0,0,0,0.3); }
-    .node-target { background: #ffcc00; border: 2px solid #ffffff; box-shadow: 0 0 18px #ffcc00, inset 0 0 8px rgba(0,0,0,0.3); }
-    .node-wall { background: #22252a; border: 1px solid #3a3f47; box-shadow: inset 0 0 5px rgba(0,0,0,0.8); }
+    /* Direct Grid Cell Button Override for Touch Movement */
+    .stButton > button.grid-btn {
+        width: 50px !important; height: 50px !important;
+        margin: 2px !important; padding: 0px !important;
+        background: #142d22 !important; border: 1px solid #254d3b !important;
+        border-radius: 10px !important; font-size: 24px !important;
+        transition: all 0.1s ease;
+    }
+    .stButton > button.grid-btn:active { transform: scale(0.92); }
     
-    .sprite-icon { font-size: 22px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+    /* Neon Glow Overrides for Dynamic Entities */
+    .stButton > button.cell-player { background: #78ffd6 !important; border: 2px solid #ffffff !important; box-shadow: 0 0 15px #78ffd6; }
+    .stButton > button.cell-monster { background: #ff4b4b !important; border: 2px solid #ffffff !important; box-shadow: 0 0 15px #ff4b4b; }
+    .stButton > button.cell-treasure { background: #ffcc00 !important; border: 2px solid #ffffff !important; box-shadow: 0 0 15px #ffcc00; }
+    .stButton > button.cell-wall { background: #3d5a4c !important; border: 1px solid #527865 !important; }
 
-    /* Compact Integrated Mobile Controller Overlay */
-    .dpad-container { background: #0d0e15; border: 1px solid #1f4068; border-radius: 18px; padding: 10px; }
-    .btn-core button {
-        width: 100% !important; height: 45px !important;
-        background: linear-gradient(135deg, #1f4068, #0d0e15) !important;
-        color: #00fff5 !important; border: 1px solid #00fff5 !important;
-        font-weight: bold !important; font-size: 20px !important; border-radius: 10px !important;
-        box-shadow: 0 0 8px rgba(0,255,245,0.15) !important;
+    /* Interface Utility Navigation Buttons */
+    .menu-btn button {
+        background: linear-gradient(135deg, #a8ff78, #78ffd6) !important; color: #050a07 !important;
+        font-weight: 900 !important; font-size: 18px !important; border-radius: 12px !important; border: none !important;
+        padding: 10px !important; box-shadow: 0 4px 15px rgba(120,255,214,0.3) !important;
     }
-    
-    /* System Command Layout */
-    .btn-sys button {
-        background: linear-gradient(135deg, #ff0055, #95103c) !important; color: #fff !important;
-        font-weight: bold !important; border-radius: 10px !important; border: none !important;
-        box-shadow: 0 4px 12px rgba(255,0,85,0.2) !important;
-    }
-    .btn-next button {
-        background: linear-gradient(135deg, #00ff66, #009944) !important; color: #000 !important;
-        font-weight: 900 !important; border-radius: 10px !important; border: none !important;
-        box-shadow: 0 4px 12px rgba(0,255,102,0.3) !important;
+    .sys-btn button {
+        background: transparent !important; color: #ff4b4b !important;
+        border: 1px solid #ff4b4b !important; font-weight: bold !important; border-radius: 10px !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1 class='arcade-title'>CYBER-HUNT</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='nature-title'>MYSTIC HUNT</h1>", unsafe_allow_html=True)
 
-# 1. High-Performance AI Core Engine (BFS)
-def calculate_ai_route(monster, player, grid_size, walls):
+# 1. State Initializers
+if 'screen' not in st.session_state:
+    st.session_state.screen = "HOME"  # HOME, PLAYING
+if 'score' not in st.session_state:
+    st.session_state.score = 0
+    st.session_state.high_score = 0
+
+# BFS Pathfinding Algorithm for AI Monster
+def get_ai_next_step(monster, player, grid_size, walls):
     queue = collections.deque([[monster]])
     visited = {monster} | set(walls)
     while queue:
@@ -108,156 +114,141 @@ def calculate_ai_route(monster, player, grid_size, walls):
                 visited.add((nr, nc))
     return monster
 
-# 2. State Controller for Procedural Generation & High Scores
-if 'score' not in st.session_state:
-    st.session_state.score = 0
-    st.session_state.high_score = 0
-    st.session_state.streak = 0
-
-def build_procedural_map():
-    # Dynamic difficulty mechanics based on current session score
+def init_procedural_level():
     st.session_state.grid_size = 5 if st.session_state.score < 5 else 6
     g_size = st.session_state.grid_size
-    
     st.session_state.player = (0, 0)
     st.session_state.monster = (g_size - 1, g_size - 1)
-    
-    # Generate unpredictable target destinations
     st.session_state.treasure = (random.randint(1, g_size-2), random.randint(1, g_size-2))
     
-    # Calculate obstacle wall density based on score scaling
+    # Generate random environmental walls
     st.session_state.walls = []
-    num_walls = min(st.session_state.score + 1, 4) if g_size == 5 else min(st.session_state.score, 6)
-    
+    num_walls = min(st.session_state.score + 1, 4)
     while len(st.session_state.walls) < num_walls:
         w = (random.randint(0, g_size-1), random.randint(0, g_size-1))
         if w not in [st.session_state.player, st.session_state.monster, st.session_state.treasure]:
             st.session_state.walls.append(w)
             
-    st.session_state.moves = 0
-    st.session_state.game_state = "LIVE" # LIVE, WASTED, STAGE_CLEAR
+    st.session_state.game_status = "LIVE"
 
-if 'game_state' not in st.session_state:
-    build_procedural_map()
-
-def trigger_game_over():
-    st.session_state.game_state = "WASTED"
-    if st.session_state.score > st.session_state.high_score:
-        st.session_state.high_score = st.session_state.score
-    st.session_state.streak = 0
-
-def step_engine(dr, dc):
-    if st.session_state.game_state != "LIVE":
+def handle_cell_touch(target_r, target_c):
+    if st.session_state.game_status != "LIVE":
         return
         
-    g_size = st.session_state.grid_size
-    r, c = st.session_state.player
-    nr, nc = r + dr, c + dc
-    
-    if 0 <= nr < g_size and 0 <= nc < g_size and (nr, nc) not in st.session_state.walls:
-        st.session_state.player = (nr, nc)
-        st.session_state.moves += 1
+    pr, pc = st.session_state.player
+    # Validate step calculation (Only allow adjacent orthogonal moves)
+    if abs(pr - target_r) + abs(pc - target_c) == 1:
+        if (target_r, target_c) in st.session_state.walls:
+            return # Blocked by obstacle
+            
+        # Move Player
+        st.session_state.player = (target_r, target_c)
         
-        # Victory check
+        # Check Win state
         if st.session_state.player == st.session_state.treasure:
             st.session_state.score += 1
-            st.session_state.streak += 1
-            st.session_state.game_state = "STAGE_CLEAR"
+            st.session_state.game_status = "WON"
             return
             
-        # Dynamic AI Scaling Intelligence Loop
-        monster_ticks = True
-        # On early scores, AI exhibits occasional calculation latency (slow mode)
-        if st.session_state.score < 3 and st.session_state.moves % 3 == 0:
-            monster_ticks = False
-            
-        if monster_ticks:
-            st.session_state.monster = calculate_ai_route(
-                st.session_state.monster, st.session_state.player, g_size, st.session_state.walls
-            )
-            
+        # Move AI Monster
+        st.session_state.monster = get_ai_next_step(
+            st.session_state.monster, st.session_state.player, st.session_state.grid_size, st.session_state.walls
+        )
+        
+        # Check Lose state
         if st.session_state.monster == st.session_state.player:
-            trigger_game_over()
+            st.session_state.game_status = "WASTED"
+            if st.session_state.score > st.session_state.high_score:
+                st.session_state.high_score = st.session_state.score
 
-# 3. Render Real-Time HUD Dashboard Panel
-st.markdown(f"""
-    <div class='hud-container'>
-        <div class='hud-stat'>SCORE: <span class='hud-val'>{st.session_state.score:02d}</span></div>
-        <div class='hud-stat'>STREAK: <span class='hud-val'>🔥{st.session_state.streak}</span></div>
-        <div class='hud-stat'>BEST: <span class='hud-val'>{st.session_state.high_score:02d}</span></div>
-    </div>
-""", unsafe_allow_html=True)
-
-# 4. Generate Procedural Graphics Grid Layout
-grid_html = "<div class='matrix-frame'>"
-for r in range(st.session_state.grid_size):
-    grid_html += "<div class='matrix-row'>"
-    for c in range(st.session_state.grid_size):
-        if (r, c) == st.session_state.player:
-            grid_html += "<div class='matrix-cell node-player'><span class='sprite-icon'>🛸</span></div>"
-        elif (r, c) == st.session_state.monster:
-            grid_html += "<div class='matrix-cell node-monster'><span class='sprite-icon'>👾</span></div>"
-        elif (r, c) == st.session_state.treasure:
-            grid_html += "<div class='matrix-cell node-target'><span class='sprite-icon'>💎</span></div>"
-        elif (r, c) in st.session_state.walls:
-            grid_html += "<div class='matrix-cell node-wall'><span class='sprite-icon'>🚧</span></div>"
-        else:
-            grid_html += "<div class='matrix-cell'></div>"
-    grid_html += "</div>"
-grid_html += "</div>"
-
-st.markdown(grid_html, unsafe_allow_html=True)
-
-# 5. Immersive Action Alerts & Screen States
-if st.session_state.game_state == "WASTED":
-    st.error("💀 SYSTEM TERMINATED // WASTED. The AI entity overrode your core dashboard.")
-elif st.session_state.game_state == "STAGE_CLEAR":
-    st.balloons()
-    st.success(f"⚡ DATA CORE ACQUIRED! Next stage initialized.")
-    st.markdown("<div class='btn-next'>", unsafe_allow_html=True)
-    if st.button("LOAD NEXT PROCEDURAL SECTOR ▶", use_container_width=True):
-        build_procedural_map()
+# 2. SCREEN VIEW MANAGER
+if st.session_state.screen == "HOME":
+    st.markdown("""
+        <div class='main-menu-card'>
+            <h3 style='color: #78ffd6; margin-bottom: 5px;'>WELCOME TO THE UNTAMED FOREST</h3>
+            <p style='font-size: 13px; color: #a2bcae; margin-bottom: 25px;'>Outsmart the AI core entity using direct touch grid movements.</p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.write(" ")
+    st.markdown("<div class='menu-btn'>", unsafe_allow_html=True)
+    if st.button("⚔️ START MISSION", use_container_width=True):
+        st.session_state.score = 0
+        init_procedural_level()
+        st.session_state.screen = "PLAYING"
         st.rerun()
     st.markdown("</div>", unsafe_allow_html=True)
 
-# 6. Optimized Mobile Arcade D-Pad Controls
-st.markdown("<div class='dpad-container'>", unsafe_allow_html=True)
-col1, col2, col3 = st.columns([1, 2, 1])
-
-with col2:
-    cc1, cc2, cc3 = st.columns([1, 2, 1])
-    with cc2:
-        st.markdown("<div class='btn-core'>", unsafe_allow_html=True)
-        if st.button("▲", key="up"): step_engine(-1, 0)
-        st.markdown("</div>", unsafe_allow_html=True)
+elif st.session_state.screen == "PLAYING":
+    # Display Scoreboard HUD
+    st.markdown(f"""
+        <div class='hud-container'>
+            <div class='hud-stat'>SCORE: <span style='color:#fff;'>{st.session_state.score:02d}</span></div>
+            <div class='hud-stat'>STAGE: <span style='color:#fff;'>0{st.session_state.score + 1}</span></div>
+            <div class='hud-stat'>BEST: <span style='color:#fff;'>{st.session_state.high_score:02d}</span></div>
+        </div>
+    """, unsafe_allow_html=True)
     
-    cl1, cl2, cl3 = st.columns([1.5, 1, 1.5])
-    with cl1:
-        st.markdown("<div class='btn-core'>", unsafe_allow_html=True)
-        if st.button("◀", key="left"): step_engine(0, -1)
-        st.markdown("</div>", unsafe_allow_html=True)
-    with cl2:
-        st.markdown("<p style='text-align:center; font-size:16px; margin-top:8px; color:#4facfe;'>⌖</p>", unsafe_allow_html=True)
-    with cl3:
-        st.markdown("<div class='btn-core'>", unsafe_allow_html=True)
-        if st.button("▶", key="right"): step_engine(0, 1)
+    # Render Interactive Matrix Grid
+    g_size = st.session_state.grid_size
+    
+    # We use native Streamlit Columns to generate clean layouts
+    for r in range(g_size):
+        cols = st.columns(g_size)
+        for c in range(g_size):
+            with cols[c]:
+                # Assign dynamic classes for styling
+                btn_class = "grid-btn"
+                label = ""
+                
+                if (r, c) == st.session_state.player:
+                    btn_class += " cell-player"
+                    label = "🛸"
+                elif (r, c) == st.session_state.monster:
+                    btn_class += " cell-monster"
+                    label = "👾"
+                elif (r, c) == st.session_state.treasure:
+                    btn_class += " cell-treasure"
+                    label = "💎"
+                elif (r, c) in st.session_state.walls:
+                    btn_class += " cell-wall"
+                    label = "🚧"
+                
+                # Render cell button
+                st.button(
+                    label, 
+                    key=f"cell_{r}_{c}", 
+                    on_click=handle_cell_touch, 
+                    args=(r, c),
+                    help=None
+                )
+                
+                # Apply CSS directly injection via layout trick
+                st.markdown(f"<script>document.getElementById('cell_{r}_{c}').className += ' {btn_class}';</script>", unsafe_allow_html=True)
+
+    # Status System Notifications 
+    if st.session_state.game_status == "WASTED":
+        st.error("💀 SYSTEM TERMINATED // WASTED. The Monster caught you.")
+        st.markdown("<div class='menu-btn'>", unsafe_allow_html=True)
+        if st.button("🔄 RESTART LEVEL", use_container_width=True):
+            init_procedural_level()
+            st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
         
-    cd1, cd2, cd3 = st.columns([1, 2, 1])
-    with cd2:
-        st.markdown("<div class='btn-core'>", unsafe_allow_html=True)
-        if st.button("▼", key="down"): step_engine(1, 0)
+    elif st.session_state.game_status == "WON":
+        st.balloons()
+        st.success("⚡ CORE ACQUIRED! Path to next sector open.")
+        st.markdown("<div class='menu-btn'>", unsafe_allow_html=True)
+        if st.button("NEXT SECTOR ▶", use_container_width=True):
+            init_procedural_level()
+            st.rerun()
         st.markdown("</div>", unsafe_allow_html=True)
 
-st.markdown("</div>", unsafe_allow_html=True)
-
-# System Master Reboot Row
-st.write(" ")
-st.markdown("<div class='btn-sys'>", unsafe_allow_html=True)
-if st.button("🔄 REBOOT SYSTEM CORE (RESET SCORE)", use_container_width=True):
-    st.session_state.score = 0
-    st.session_state.streak = 0
-    build_procedural_map()
-    st.rerun()
-st.markdown("</div>", unsafe_allow_html=True)
-                
+    # Home Navigation Utility Row
+    st.write(" ")
+    st.markdown("<div class='sys-btn'>", unsafe_allow_html=True)
+    if st.button("🏠 RETURN TO MAIN MENU", use_container_width=True):
+        st.session_state.screen = "HOME"
+        st.rerun()
+    st.markdown("</div>", unsafe_allow_html=True)
+    
